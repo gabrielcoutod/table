@@ -5,8 +5,8 @@ class Table:
     '''
 
     @staticmethod
-    def get_table(headers, data, fixed_space=False, separator_between_lines='-',
-        separator_around_lines='', separator_between_cols=' ',  separator_around_cols='', separator_for_data=False):
+    def get_table(headers, data, fixed_space=False, separator_headers_data='-', separator_for_data = '',
+        separator_around_lines='', separator_between_cols=' ',  separator_around_cols=''):
         '''
         Returns the table string.
         '''
@@ -22,7 +22,7 @@ class Table:
             string.append('\n')
         string.append(Table.get_line(headers, space, separator_between_cols, separator_around_cols))
         string.append('\n')
-        string.append(Table.get_line_separator(space, separator_between_lines, separator_between_cols, separator_around_cols))
+        string.append(Table.get_line_separator(space, separator_headers_data, separator_between_cols, separator_around_cols))
         string.append('\n')
 
         # appends data and separators around it
@@ -32,7 +32,7 @@ class Table:
             string.append('\n')
             if i != num_lines - 1:
                 if separator_for_data:
-                    string.append(Table.get_line_separator(space, separator_between_lines, separator_between_cols, separator_around_cols))
+                    string.append(Table.get_line_separator(space, separator_for_data, separator_between_cols, separator_around_cols))
                     string.append('\n')
             else:
                 string.append(Table.get_line_separator(space, separator_around_lines, separator_between_cols, separator_around_cols) )
@@ -86,13 +86,13 @@ if __name__ == "__main__":
     print(Table.get_table(headers, data))
     print("fixed_space=True:\n")
     print(Table.get_table(headers, data, fixed_space=True))
-    print("separator_between_lines='~':\n")
-    print(Table.get_table(headers, data, separator_between_lines='~'))
+    print("separator_headers_data='~':\n")
+    print(Table.get_table(headers, data, separator_headers_data='~'))
+    print("separator_for_data='~':\n")
+    print(Table.get_table(headers, data, separator_for_data='~'))
     print("separator_between_cols='|':\n")
     print(Table.get_table(headers, data, separator_between_cols='|'))
     print("separator_around_lines='-':\n")
     print(Table.get_table(headers, data, separator_around_lines='-'))
     print("separator_around_cols='|':\n")
     print(Table.get_table(headers, data, separator_around_cols='|'))
-    print("separator_for_data=True:\n")
-    print(Table.get_table(headers, data, separator_for_data=True))
