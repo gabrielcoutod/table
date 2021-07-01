@@ -29,13 +29,16 @@ class Table:
         num_lines = len(data)
         for i in range(num_lines):
             string.append(Table.get_line(data[i], space, separator_between_cols, separator_around_cols))
-            string.append('\n')
             if i != num_lines - 1:
+                string.append('\n')
                 if separator_for_data:
                     string.append(Table.get_line_separator(space, separator_for_data, separator_between_cols, separator_around_cols))
                     string.append('\n')
             else:
-                string.append(Table.get_line_separator(space, separator_around_lines, separator_between_cols, separator_around_cols) )
+                end_line = Table.get_line_separator(space, separator_around_lines, separator_between_cols, separator_around_cols) 
+                if end_line:
+                    string.append('\n')
+                    string.append(end_line)
 
         return "".join(string)
 
@@ -80,19 +83,21 @@ class Table:
 if __name__ == "__main__":
     # examples of how to use the class
     headers = ['header 1', 'header 2','header 3']
-    data = [['data 1.1 ','data 2.1  ','data 3.1   '], ['data 1.1','data 2.2','data 3.2'], ['data 1.3','data 2.3','data 3.3']]
+    data = [['data 1.1 ','data 2.1  ','data 3.1   '], 
+        ['data 1.1','data 2.2','data 3.2'], 
+        ['data 1.3','data 2.3','data 3.3']]
 
     print("Normal table:\n")
     print(Table.get_table(headers, data))
-    print("fixed_space=True:\n")
+    print("\nfixed_space=True:\n")
     print(Table.get_table(headers, data, fixed_space=True))
-    print("separator_headers_data='~':\n")
+    print("\nseparator_headers_data='~':\n")
     print(Table.get_table(headers, data, separator_headers_data='~'))
-    print("separator_for_data='~':\n")
+    print("\nseparator_for_data='~':\n")
     print(Table.get_table(headers, data, separator_for_data='~'))
-    print("separator_between_cols='|':\n")
+    print("\nseparator_between_cols='|':\n")
     print(Table.get_table(headers, data, separator_between_cols='|'))
-    print("separator_around_lines='-':\n")
+    print("\nseparator_around_lines='-':\n")
     print(Table.get_table(headers, data, separator_around_lines='-'))
-    print("separator_around_cols='|':\n")
+    print("\nseparator_around_cols='|':\n")
     print(Table.get_table(headers, data, separator_around_cols='|'))
